@@ -20,7 +20,14 @@ class StorePicker extends React.Component{
         // inside render this refers to the class , but inside other methods it is not by default
         // other methods are not implicitly bind to the class
         // to access this , bind the method inside the constructor or bind this to the event trigger inside render
-        console.log(this.storeInput.value)
+        // now the input tag ref StoreInput can be accessed by this
+            //console.log(this.storeInput.value)
+        // now redirect to /store/:storeId    
+        // either use a render <redirct> component or use transitionTo
+        // parent Component is available to children (BrowserRouter)
+        // to surface BrowserRouter use context (setting it at the end)
+        this.context.router.transitionTo(`/store/${this.storeInput.value}`);
+
     }// es6 class no comma required
 
 
@@ -48,5 +55,11 @@ class StorePicker extends React.Component{
         );
     }
 };
+// setting the context for the StorePicker
+StorePicker.contextTypes ={
+    // tell react to make router from BrowserRouter available for the StorePicker
+    router: React.PropTypes.object
+};
+
 // exporting the entire class 
 export default StorePicker;
