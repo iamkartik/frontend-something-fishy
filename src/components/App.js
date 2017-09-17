@@ -9,7 +9,8 @@ class App extends React.Component{
         return (
             <div className="catch-of-the-day">
                 <div className="menu">
-                    <Header/>
+                    {/*prop can provide attributes to a component ,provide data*/}
+                    <Header tagline="Fresh SeaFood Market"/>
                 </div>
                 <Order/>
                 <Inventory/>
