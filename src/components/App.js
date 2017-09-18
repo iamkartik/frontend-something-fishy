@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
+import Fish from './Fish';
 import sampleFishes from '../sample-fishes';
 
 
@@ -51,6 +52,17 @@ class App extends React.Component{
                 <div className="menu">
                     {/*prop can provide attributes to a component ,provide data*/}
                     <Header tagline="Fresh SeaFood Market"/>
+                    <ul className="list-of-fishes">
+                        { // using js to loop over the fishes object in state  
+                         //using Object.keys to return all the keys inside the fishes object
+                         // using map on the returned array to het the fish data   
+                         Object
+                            .keys(this.state.fishes)
+                            // a unique key is required to ensure React can differntiate b/w diff fishes while updating
+                            // passing the details to render out the fish
+                            .map(key => <Fish key={ key } details={ this.state.fishes[key] }/>)
+                         }
+                    </ul>
                 </div>
                 <Order/>
                     {/*the add fish function is passed down as prop*/}

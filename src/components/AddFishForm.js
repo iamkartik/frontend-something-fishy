@@ -9,7 +9,7 @@ class AddFishForm extends React.Component {
             name:this.name.value,
             price:this.price.value,
             status:this.status.value,
-            description:this.description.value,
+            desc:this.desc.value,
             image:this.image.value
         }
         // saving the stae to App component
@@ -31,7 +31,7 @@ class AddFishForm extends React.Component {
                     <option value="available">Fresh</option>
                     <option value="unavailable">Sold Out!</option>
                 </select>
-                <textarea ref={(input)=>this.description = input} type="text" placeholder="Fish Description"/>
+                <textarea ref={(input)=>this.desc = input} type="text" placeholder="Fish Description"/>
                 <input ref={(input)=>this.image = input} type="text" placeholder="Fish Image"/>
                 <button type="submit">Add Fish</button>
             </form>
