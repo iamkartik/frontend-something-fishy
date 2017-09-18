@@ -9,6 +9,7 @@ class Inventory extends React.Component {
                 <h2>Inventory</h2>
                     {/*passing addFish method from app to AddFishForm,It is now inside props of Inventory*/}
                 <AddFishForm addFish={ this.props.addFish }/>        
+                <button onClick={this.props.loadSamples}>Load Sample Fishes</button>
             </div>
             );
     }
