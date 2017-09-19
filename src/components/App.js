@@ -4,6 +4,7 @@ import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
 import Fish from './Fish';
+import base from '../base';
 import sampleFishes from '../sample-fishes';
 
 
@@ -14,6 +15,7 @@ class App extends React.Component{
         // tell the types of objects that will be stored
         // getinitialState
         this.state={
+            // fishes synced to firebase and order to localstorage
             fishes:{},
             order:{}
         };
@@ -24,6 +26,25 @@ class App extends React.Component{
 
         this.addToOrder = this.addToOrder.bind(this);
     }
+
+    // component will mount is a special method that runs during the component life cycle 
+    // hooking to sync our data with firebase before the component is renderd
+    // it is used in React component life cycle
+    // https://facebook.github.io/react/docs/react-component.html
+    componentWillMount(){
+        // params in props contains the pathname and location 
+        this.ref = base.syncState(`${this.props.params.storeId}/fishes`,
+        {   // passing the context and which state to sync
+            context:this,
+            state:'fishes'
+        });
+    }
+    // the function which runs after the component is removed
+    componentWillUnMount(){
+        // to ensure that sync does not happen once we close the component and go to other store
+        base.removeBinding(this.ref);        
+    }
+
     // addFish is a method to enable adding of fish in state 
     addFish(fish){
         // update the state
