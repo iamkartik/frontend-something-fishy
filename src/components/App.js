@@ -21,6 +21,8 @@ class App extends React.Component{
         this.addFish = this.addFish.bind(this);
 
         this.loadSamples = this.loadSamples.bind(this);
+
+        this.addToOrder = this.addToOrder.bind(this);
     }
     // addFish is a method to enable adding of fish in state 
     addFish(fish){
@@ -46,6 +48,15 @@ class App extends React.Component{
         });
     }
 
+    // add to order to add fishes to order
+    addToOrder(key){
+        // take copy of the state
+        const order = {...this.state.order};
+        order[key] = order[key]+1 || 1;
+        // update the state
+        this.setState({ order:order });
+    }
+
     render(){
         return (
             <div className="catch-of-the-day">
@@ -60,11 +71,14 @@ class App extends React.Component{
                             .keys(this.state.fishes)
                             // a unique key is required to ensure React can differntiate b/w diff fishes while updating
                             // passing the details to render out the fish
-                            .map(key => <Fish key={ key } details={ this.state.fishes[key] }/>)
+                            // passing the add to order function to add a fish to order
+                            // passing key as a props(index) as key cannot be accessed inside Fish
+                            .map(key => <Fish key={ key } index={ key } details={ this.state.fishes[key] } 
+                            addToOrder={this.addToOrder}/>)
                          }
                     </ul>
                 </div>
-                <Order/>
+                <Order fishes={ this.state.fishes } order={ this.state.order }/>
                     {/*the add fish function is passed down as prop*/}
                 <Inventory addFish={ this.addFish } loadSamples={ this.loadSamples }/>
             </div>
