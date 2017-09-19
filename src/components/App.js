@@ -38,11 +38,27 @@ class App extends React.Component{
             context:this,
             state:'fishes'
         });
+
+        // check if any order in localStorage , if present then load it
+        const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`);
+
+        if(localStorageRef){
+            // update App component state
+            this.setState({
+                order:JSON.parse(localStorageRef)
+            });
+        }
     }
     // the function which runs after the component is removed
     componentWillUnMount(){
         // to ensure that sync does not happen once we close the component and go to other store
         base.removeBinding(this.ref);        
+    }
+
+    // adding another life cycle method , componentWillUpdate
+    // whwnever a prop or state changes this method will run
+     componentWillUpdate(nextProps, nextState) {
+        localStorage.setItem(`order-${this.props.params.storeId}`,JSON.stringify(nextState.order));
     }
 
     // addFish is a method to enable adding of fish in state 
