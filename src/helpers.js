@@ -1,5 +1,5 @@
 export function formatPrice(cents) {
-  return `$${(cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+  return `\u20B9 ${(cents*10 / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
 }
 
 export function rando(arr) {
