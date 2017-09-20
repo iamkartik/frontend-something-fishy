@@ -27,6 +27,10 @@ class App extends React.Component{
         this.addToOrder = this.addToOrder.bind(this);
 
         this.updateFish = this.updateFish.bind(this);
+
+        this.deleteFish = this.deleteFish.bind(this);
+
+         this.removeFromOrder = this.removeFromOrder.bind(this);
     }
 
     // component will mount is a special method that runs during the component life cycle 
@@ -91,6 +95,15 @@ class App extends React.Component{
        // debugger;
     }
 
+    deleteFish(key){
+        // copy of fishes
+        const fishes = {...this.state.fishes};
+        // delete the fish , setting it null to delete in firebase
+        fishes[key] = null;
+        // update state
+        this.setState({fishes});
+    }
+
     // creating LoadSamples function to load sample data
     // It's created in App instead of Inventory as state is inside App component
     loadSamples(){
@@ -106,6 +119,15 @@ class App extends React.Component{
         order[key] = order[key]+1 || 1;
         // update the state
         this.setState({ order:order });
+    }
+
+    removeFromOrder(key){
+        // copy of order state
+        const order = {...this.state.order};
+        //remove from order 
+        delete order[key];
+        // update state
+        this.setState({order});
     }
 
     render(){
@@ -129,10 +151,12 @@ class App extends React.Component{
                          }
                     </ul>
                 </div>
-                <Order fishes={ this.state.fishes } order={ this.state.order }/>
+                <Order fishes={ this.state.fishes } order={ this.state.order }
+                    removeFromOrder={ this.removeFromOrder }/>
                     {/*the add fish function is passed down as prop*/}
                 <Inventory addFish={ this.addFish } loadSamples={ this.loadSamples } 
-                    fishes={ this.state.fishes } updateFish={ this.updateFish }/>
+                    fishes={ this.state.fishes } updateFish={ this.updateFish }
+                    deleteFish={ this.deleteFish }/>
             </div>
         );
     }

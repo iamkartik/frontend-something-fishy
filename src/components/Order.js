@@ -12,15 +12,17 @@ class Order extends React.Component{
     renderOrder(key){
         const fish = this.props.fishes[key];
         const count = this.props.order[key];
+        // delete from order button 
+        const removeButton = <button onClick={()=>this.props.removeFromOrder(key)}>&times;</button>;
         // fish deleted from inventory or unavailable
-        if(!fish || !fish.status==='available'){
+        if(!fish || fish.status==='unavailable'){
             // key is required in li to tell react which li to access
-            return <li key={ key }> Sorry,{ fish?fish.name:'fish'} is no longer available!</li>; 
+            return <li key={ key }> Sorry,{ fish?fish.name:'fish'} is no longer available! {removeButton}</li>; 
         }
 
         return (
             <li key={ key }>
-               <span>{ count }kgs { fish.name }</span>     
+               <span>{ count }kgs { fish.name } {removeButton}</span>     
                <span className="price">{ formatPrice(count*fish.price) }</span>
             </li> 
         );
