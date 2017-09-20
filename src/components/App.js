@@ -25,6 +25,8 @@ class App extends React.Component{
         this.loadSamples = this.loadSamples.bind(this);
 
         this.addToOrder = this.addToOrder.bind(this);
+
+        this.updateFish = this.updateFish.bind(this);
     }
 
     // component will mount is a special method that runs during the component life cycle 
@@ -77,6 +79,18 @@ class App extends React.Component{
         // passing down the addFish method to Inventory as props to enable addFish in AddFishForm component
     }
 
+    updateFish(key,updatedFish){
+        
+        console.log(updatedFish);
+        // copy of state
+        const fishes = {...this.state.fishes};
+        // update to the updated fish
+        fishes[key]=updatedFish;
+        // update state
+        this.setState({ fishes });               
+       // debugger;
+    }
+
     // creating LoadSamples function to load sample data
     // It's created in App instead of Inventory as state is inside App component
     loadSamples(){
@@ -117,7 +131,8 @@ class App extends React.Component{
                 </div>
                 <Order fishes={ this.state.fishes } order={ this.state.order }/>
                     {/*the add fish function is passed down as prop*/}
-                <Inventory addFish={ this.addFish } loadSamples={ this.loadSamples }/>
+                <Inventory addFish={ this.addFish } loadSamples={ this.loadSamples } 
+                    fishes={ this.state.fishes } updateFish={ this.updateFish }/>
             </div>
         );
     }
