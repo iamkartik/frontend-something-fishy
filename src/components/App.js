@@ -135,7 +135,7 @@ class App extends React.Component{
             <div className="catch-of-the-day">
                 <div className="menu">
                     {/*prop can provide attributes to a component ,provide data*/}
-                    <Header tagline="Fresh SeaFood Market"/>
+                    <Header tagline="Fresh SeaFood"/>
                     <ul className="list-of-fishes">
                         { // using js to loop over the fishes object in state  
                          //using Object.keys to return all the keys inside the fishes object
@@ -161,5 +161,9 @@ class App extends React.Component{
         );
     }
 };
+
+App.propTypes = {
+    params:React.PropTypes.object.isRequired
+}
 
 export default App;

@@ -19,4 +19,12 @@ import React from 'react';
         </header>);
     }
 
+// using PropTypes to validate data 
+// specifying what kind of date is expected for tagline
+// isRequired at the end tells React that this property is required
+Header.propTypes = {
+    tagline:React.PropTypes.string.isRequired
+}
+
+
 export default Header;
