@@ -84,8 +84,7 @@ class App extends React.Component{
     }
 
     updateFish(key,updatedFish){
-        
-        console.log(updatedFish);
+    
         // copy of state
         const fishes = {...this.state.fishes};
         // update to the updated fish
@@ -156,7 +155,7 @@ class App extends React.Component{
                     {/*the add fish function is passed down as prop*/}
                 <Inventory addFish={ this.addFish } loadSamples={ this.loadSamples } 
                     fishes={ this.state.fishes } updateFish={ this.updateFish }
-                    deleteFish={ this.deleteFish }/>
+                    deleteFish={ this.deleteFish } storeId={ this.props.params.storeId }/>
             </div>
         );
     }
